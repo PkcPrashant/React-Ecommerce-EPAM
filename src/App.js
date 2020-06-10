@@ -1,25 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import ProductList from './components/ProductList';
+import Header from './components/Header';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ProductDetails from './components/ProductDetails';
+import Cart from './components/Cart';
+import Orders from './components/Orders';
+import Checkout from './components/Checkout';
+import { BASE_URL, PRODUCT_DETAILS_URL, CART_URL, ORDERS_URL, CHECKOUT_URL } from './Urls';
 
 function App() {
+  console.log("WINDOW ", window.document.URL);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Switch>
+        <Route exact path={BASE_URL} component={ProductList} />
+        <Route path={PRODUCT_DETAILS_URL} component={ProductDetails} />
+        <Route path={CART_URL} component={Cart} />
+        <Route path={CHECKOUT_URL} component={Checkout} />
+        <Route path={ORDERS_URL} component={Orders} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
